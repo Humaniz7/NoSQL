@@ -1,0 +1,343 @@
+/*Remove Line Breaks*/
+/*https://www.textfixer.com/tools/remove-line-breaks.php*/
+
+###CREATE COLLECTION#######################################
+###A
+/*create collection*/
+
+db.createCollection("Employee");
+db.createCollection("Department");
+db.createCollection("Branch");
+db.createCollection("Product");
+db.createCollection("Product_type");
+
+###REFERENCE###############################################
+###B
+/*insert value to collection*/
+
+/*Employee*/
+db.Employee.insert
+(
+	{
+	"EMP_ID" : 1,
+	"First_name" : "Michael", 
+	"Last_name" : "Smith", 
+	"Start_date" : '2001-06-22',
+	"Dept_ID" : 3,
+	"Title" : "President",
+	"Assigned_branch_id" : 1
+	},
+
+	{
+	"EMP_ID" : 2,
+	"First_name" : "Susan", 
+	"Last_name" : "Barker", 
+	"Start_date" : '2002-09-12',
+	"Dept_ID" : 3,
+	"Title" : "Vice President",
+	"Assigned_branch_id" : 1
+	},
+
+	{
+	"EMP_ID" : 3,
+	"First_name" : "Robert", 
+	"Last_name" : "Tyler", 
+	"Start_date" : '2000-02-09',
+	"Dept_ID" : 3,
+	"Title" : "Treasurer",
+	"Assigned_branch_id" : 1
+	},
+
+	{
+	"EMP_ID" : 4,
+	"First_name" : "Susan", 
+	"Last_name" : "Hawthorne", 
+	"Start_date" : '2002-04-24',
+	"Dept_ID" : 1,
+	"Title" : "Operations Manager",
+	"Assigned_branch_id" : 1
+	},
+
+	{
+	"EMP_ID" : 5,
+	"First_name" : "John", 
+	"Last_name" : "Gooding", 
+	"Start_date" : '2003-11-14',
+	"Dept_ID" : 2,
+	"Title" : "Loan Manager",
+	"Assigned_branch_id" : 1
+	}
+);
+
+/*Department*/
+db.Department.insert
+(
+	{
+	"Dept_ID" : 1,
+	"Name" : "Operations"
+	},
+
+	{
+	"Dept_ID" : 2,
+	"Name" : "Loans"
+	},
+
+	{
+	"Dept_ID" : 3,
+	"Name" : "Administration"
+	},
+
+	{
+	"Dept_ID" : 4,
+	"Name" : "IT"
+	},
+
+	{
+	"Dept_ID" : 5,
+	"Name" : "IT"
+	}
+
+);
+
+/*Branch*/
+db.Branch.insert
+(
+	{
+	"Branch_ID" : 1,
+	"Name" : "Headquarters",
+	"Address" : "3882 Main St.",
+	"City" : "Waltham",
+	"State" : "MA",
+	"Zip_code" : "02451"
+	},
+
+	{
+	"Branch_ID" : 2,
+	"Name" : "Woburn Branch",
+	"Address" : "422 Maple St.",
+	"City" : "Woburn",
+	"State" : "MA",
+	"Zip_code" : "01801"
+	},
+
+	{
+	"Branch_ID" : 3,
+	"Name" : "Quincy Branch",
+	"Address" : "125 Presidential Way",
+	"City" : "Quincy",
+	"State" : "MA",
+	"Zip_code" : "02169"
+	},
+
+	{
+	"Branch_ID" : 4,
+	"Name" : "So. NH Branch",
+	"Address" : "378 Maynard Ln.",
+	"City" : "Salem",
+	"State" : "NH",
+	"Zip_code" : "03079"
+	},
+
+	{
+	"Branch_ID" : 5,
+	"Name" : "So. NH Branch",
+	"Address" : "378 Maynard Ln.",
+	"City" : "Salem",
+	"State" : "NH",
+	"Zip_code" : "03079"
+	}
+);
+
+/*Product*/
+db.Product.insert
+(
+	{
+	"Product_cd" : "CHK",
+	"Name" : "checking account",
+	"Product_type_cd" : "ACCOUNT",
+	"Date_offered" : "2000-01-01"
+	},
+
+	{
+	"Product_cd" : "SAV",
+	"Name" : "savings account",
+	"Product_type_cd" : "ACCOUNT",
+	"Date_offered" : "2000-01-01"
+	},
+
+	{
+	"Product_cd" : "MM",
+	"Name" : "money market account",
+	"Product_type_cd" : "ACCOUNT",
+	"Date_offered" : "2000-01-01"
+	},
+
+	{
+	"Product_cd" : "CD",
+	"Name" : "certificate of deposit",
+	"Product_type_cd" : "ACCOUNT",
+	"Date_offered" : "2000-01-01"
+	},
+
+	{
+	"Product_cd" : "MRT",
+	"Name" : "home mortgage",
+	"Product_type_cd" : "LOAN",
+	"Date_offered" : "2000-01-01"
+	},
+
+	{
+	"Product_cd" : "AUT",
+	"Name" : "auto loan",
+	"Product_type_cd" : "LOAN",
+	"Date_offered" : "2000-01-01"
+	},
+
+	{
+	"Product_cd" : "BUS",
+	"Name" : "business line of credit",
+	"Product_type_cd" : "LOAN",
+	"Date_offered" : "2000-01-01"
+	},
+
+	{
+	"Product_cd" : "SBL",
+	"Name" : "small business loan",
+	"Product_type_cd" : "LOAN",
+	"Date_offered" : "2000-01-01"
+	}
+);
+
+/*Product_type*/
+db.Product_type.insert
+(
+	{
+	"Product_type_cd" : "ACCOUNT",
+	"Name" : "Customer Accounts"
+	},
+
+	{
+	"Product_type_cd" : "LOAN",
+	"Name" : "Individual and Business Loans"
+	},
+
+	{
+	"Product_type_cd" : "INSURANCE",
+	"Name" : "Insurance Offerings"
+	},
+
+	{
+	"Product_type_cd" : "INSURANCE",
+	"Name" : "Insurance Offerings"
+	},
+
+	{
+	"Product_type_cd" : "INSURANCE",
+	"Name" : "Insurance Offerings"
+	}
+);
+
+
+###EMBEDED##############################################
+###C
+db.Employee.insert
+(
+	{
+	"EMP_ID" : 1,
+	"Name" : {"First_name" : "John", "Last_name" : "Hanker"},	 
+	"Start_date" : '2001-06-22',
+	"Dept_ID" : 3,
+	"Title" : "President",
+	"Assigned_branch_id" : 1
+	},
+
+	{
+	"EMP_ID" : 2,
+	"Name" : {"First_name" : "Nalson", "Last_name" : "Parker"}, 
+	"Start_date" : '2002-09-12',
+	"Dept_ID" : 3,
+	"Title" : "Vice President",
+	"Assigned_branch_id" : 1
+	},
+
+	{
+	"EMP_ID" : 3,
+	"Name" : {"First_name" : "Nalson", "Last_name" : "Parker"}, 
+	"Start_date" : '2002-09-12',
+	"Dept_ID" : 3,
+	"Title" : "Vice President",
+	"Assigned_branch_id" : 1
+	},
+
+	{
+	"EMP_ID" : 4,
+	"Name" : {"First_name" : "Nalson", "Last_name" : "Parker"}, 
+	"Start_date" : '2002-09-12',
+	"Dept_ID" : 3,
+	"Title" : "Vice President",
+	"Assigned_branch_id" : 1
+	},
+
+	{
+	"EMP_ID" : 5,
+	"Name" : {"First_name" : "Nalson", "Last_name" : "Parker"}, 
+	"Start_date" : '2002-09-12',
+	"Dept_ID" : 3,
+	"Title" : "Vice President",
+	"Assigned_branch_id" : 1
+	}
+);
+
+/*Department*/
+#NOT suitable for embedding
+
+db.Branch.insert
+(
+	{
+	"Branch_ID" : 1,
+	"Address" : {"Name" : "Branch1", "Street" : "000 fake st.", "City" : "lolol"},
+	"State" : "MA",
+	"Zip_code" : "02451"
+	},
+
+	{
+	"Branch_ID" : 2,
+	"Address" : {"Name" : "Branch2", "Street" : "001 fake st.", "City" : "lelel"},
+	"State" : "MA",
+	"Zip_code" : "01801"
+	},
+
+	{
+	"Branch_ID" : 3,
+	"Address" : {"Name" : "Branch2", "Street" : "001 fake st.", "City" : "lelel"},
+	"State" : "MA",
+	"Zip_code" : "01801"
+	},
+
+	{
+	"Branch_ID" : 4,
+	"Address" : {"Name" : "Branch2", "Street" : "001 fake st.", "City" : "lelel"},
+	"State" : "MA",
+	"Zip_code" : "01801"
+	},
+
+	{
+	"Branch_ID" : 5,
+	"Address" : {"Name" : "Branch2", "Street" : "001 fake st.", "City" : "lelel"},
+	"State" : "MA",
+	"Zip_code" : "01801"
+	}
+);
+
+/*Product*/
+#NOT suitable for embedding
+
+/*Product_type*/
+#NOT suitable for embedding
+
+db.Employee.drop();
+db.Department.drop();
+db.Branch.drop();
+db.Product.drop();
+db.Product_type.drop();
+

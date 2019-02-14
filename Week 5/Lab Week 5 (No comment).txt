@@ -1,0 +1,171 @@
+
+db.createCollection("Inventory")
+
+db.Inventory.insertMany
+(
+	[
+		{ 
+		item : "Journal",
+		qty : 25,
+		tags : ["Black", "Red"],
+		size : {high:14, wide:21, uom:"cm"},
+		status : "A"
+		},
+
+		{
+		item : "mat",
+		qty : 85,
+		tags : ["Gray"],
+		size : {high:27.9, wide:35.5, uom:"cm"},
+		status : "A"
+		},
+
+		{
+		item : "mousepad",
+		qty : 25,
+		tags : ["Gel", "blue"],
+		size : {high:19, wide:22.85, uom:"cm"},
+		status : "P"
+		}
+	]
+)
+
+db.Inventory.insertMany
+(
+	[
+		{ 
+		item : "canvas",
+		qty : 100,
+		tags : ["Black", "Red"],
+		size : {high:28, wide:35.5, uom:"cm"},
+		status : "A"
+		},
+
+		{
+		item : "notebook",
+		qty : 50,
+		tags : ["Black", "White"],
+		size : {high:8.5, wide:11, uom:"in"},
+		status : "P"
+		},
+
+		{
+		item : "paper",
+		qty : 100,
+
+		size : {high:8.5, wide:11, uom:"in"},
+		status : "D"
+		},
+
+		{
+		item : "planner",
+		qty : 75,
+
+		size : {high:22.85, wide:30, uom:"cm"},
+		status : "D"
+		},
+
+		{
+		item : "postcard",
+		qty : 45,
+
+		size : {high:10, wide:15.25, uom:"cm"},
+		status : "A"
+		},
+
+		{
+		item : "sketchbook",
+		qty : 80,
+
+		size : {high:14, wide:21, uom:"cm"},
+		status : "A"
+		},
+
+		{
+		item : "sketch pad",
+		qty : 95,
+
+		size : {high:22.85, wide:30.5, uom:"cm"},
+		status : "A"
+		}
+	]
+)
+
+
+db.Inventory.find
+(
+	{"size.uom" : {$eq : "in"}}
+)
+
+db.Inventory.updateOne
+(
+	{"size.uom" : "in"},
+
+	{
+	$set : {"size.uom" : "cm"}
+	}
+)
+
+
+db.Inventory.find
+(
+	{"qty" : {$lt : 25}}
+)
+
+
+db.Inventory.find
+(
+	{
+		$and:
+		[
+			{"qty" : {$gt : 50}},		
+			{"status" : "A"}
+		]
+	}
+)
+
+
+db.Inventory.find
+(
+	{
+	"qty" : {$gt : 50},		
+	"status" : "A"	
+	}
+)
+
+
+db.Inventory.find
+(
+	{
+		$or:
+		[
+			{"status" : {$in : ["D", "P"]}},
+			{"item" : /t/},
+			{"qty" : {$gt : 80}}
+		]
+	}
+)
+
+
+db.Inventory.drop
+(
+	{"size.uom" : "in"}
+)
+
+
+db.Inventory.drop
+(
+	{
+	"status" : "P",
+	"item" : /e/	
+	}
+)
+
+
+db.Inventory.deleteMany({});
+
+
+db.inventory.find().pretty()
+
+
+db.Inventory.drop()

@@ -1,0 +1,173 @@
+#Create Collection in test Database
+db.createCollection("Inventory")
+
+#db.Inventory.insertOne ##INSERT ONLY ONE ROW
+#db.Inventory.insertMany ##INSERT MANY ROW AT ONCE!
+db.Inventory.insertMany
+(
+	[
+		{ 
+		item : "Journal",
+		qty : 25,
+		tags : ["Black", "Red"],
+		size : {high:14, wide:21, uom:"cm"},
+		status : "A"
+		},
+
+		{
+		item : "mat",
+		qty : 85,
+		tags : ["Gray"],
+		size : {high:27.9, wide:35.5, uom:"cm"},
+		status : "A"
+		},
+
+		{
+		item : "mousepad",
+		qty : 25,
+		tags : ["Gel", "blue"],
+		size : {high:19, wide:22.85, uom:"cm"},
+		status : "P"
+		}
+	]
+)
+
+db.Inventory.insertMany
+(
+	[
+		{ 
+		item : "canvas",
+		qty : 100,
+		tags : ["Black", "Red"],
+		size : {high:28, wide:35.5, uom:"cm"},
+		status : "A"
+		},
+
+		{
+		item : "notebook",
+		qty : 50,
+		tags : ["Black", "White"],
+		size : {high:8.5, wide:11, uom:"in"},
+		status : "P"
+		},
+
+		{
+		item : "paper",
+		qty : 100,
+		#tag : [] #NO NEED TO INSERT
+		size : {high:8.5, wide:11, uom:"in"},
+		status : "D"
+		},
+
+		{
+		item : "planner",
+		qty : 75,
+		#tag : [] #NO NEED TO INSERT
+		size : {high:22.85, wide:30, uom:"cm"},
+		status : "D"
+		},
+
+		{
+		item : "postcard",
+		qty : 45,
+		#tag : [] #NO NEED TO INSERT
+		size : {high:10, wide:15.25, uom:"cm"},
+		status : "A"
+		},
+
+		{
+		item : "sketchbook",
+		qty : 80,
+		#tag : [] #NO NEED TO INSERT
+		size : {high:14, wide:21, uom:"cm"},
+		status : "A"
+		},
+
+		{
+		item : "sketch pad",
+		qty : 95,
+		#tag : [] #NO NEED TO INSERT
+		size : {high:22.85, wide:30.5, uom:"cm"},
+		status : "A"
+		}
+	]
+)
+
+#Change uom (Unit of Messure) from "in" to "cm"
+db.Inventory.find
+(
+	{"size.uom" : {$eq : "in"}}
+)
+
+db.Inventory.updateOne
+(
+	{"size.uom" : "in"},
+
+	{
+	$set : {"size.uom" : "cm"}
+	}
+)
+
+#Display a qty is less than 25
+db.Inventory.find
+(
+	{"qty" : {$lt : 25}}
+)
+
+#Display status "A" and qty is more than 50
+db.Inventory.find
+(
+	{
+		$and:
+		[
+			{"qty" : {$gt : 50}},		
+			{"status" : "A"}
+		]
+	}
+)
+
+#EASIER WAY
+db.Inventory.find
+(
+	{
+	"qty" : {$gt : 50},		
+	"status" : "A"	
+	}
+)
+
+#Display status ("D" or "P") OR "t" in their item name OR qty > 80
+db.Inventory.find
+(
+	{
+		$or:
+		[
+			{"status" : {$in : ["D", "P"]}},
+			{"item" : /t/},
+			{"qty" : {$gt : 80}}
+		]
+	}
+)
+
+#Delete data that have uom "in"
+db.Inventory.drop
+(
+	{"size.uom" : "in"}
+)
+
+#Delete data that on status "P" AND "e" character in in their name
+db.Inventory.drop
+(
+	{
+	"status" : "P",
+	"item" : /e/	
+	}
+)
+
+#Delete ALL inventory collection
+db.Inventory.deleteMany({});
+
+#Show ALL data in Collection
+db.inventory.find().pretty()
+
+#Delete Collection
+db.Inventory.drop()
