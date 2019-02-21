@@ -1,0 +1,281 @@
+#create collection
+db.createCollection("Inventory");
+
+#a-1i
+db.Inventory.insertMany
+(
+	[
+		{ 
+		item : "Journal",
+		qty : 25,
+		tags : ["Black", "Red"],
+		size : {length:14, wide:21},
+		status : "A",
+		vendor : 24
+		},
+
+		{
+		item : "mat",
+		qty : 85,
+		tags : ["Gray"],
+		size : {length:27.9, wide:35.5},
+		status : "A",
+		vendor : 12
+		}
+	]
+);
+
+#a-2i
+db.Inventory.bulkWrite
+(
+	[
+		{
+			insertOne :
+			{
+			"document":
+				{
+				item : "mousepad",
+				qty : 0,
+				tags : ["Gel", "Blue"],
+				size : {length:19, wide:22.5},
+				status : "O",
+				vendor : 16
+				}
+			}
+		},
+
+		{
+			insertOne :
+			{
+			"document":
+				{
+				item : "canvas",
+				qty : 100,
+				tags : ["Black", "Red"],
+				size : {length:28, wide:35.5},
+				status : "A",
+				vendor : 2
+				}
+			}
+		},
+
+		{
+			insertOne :
+			{
+			"document":
+				{
+				item : "notebook",
+				qty : 50,
+				tags : ["Black", "White"],
+				size : {length:8.5, wide:11},
+				status : "P",
+				vendor : 11
+				}
+			}
+		},
+
+		{
+			updateOne :
+			{
+				"filter" : {item : "notebook"},
+				"update" : {qty : 500000000}
+			}
+		},
+
+		{
+			deleteOne :
+			{
+			"filter" : {item : "mousepad"}
+			}
+		}
+	],
+
+	{
+	ordered : true
+	}
+);
+
+#a-3i
+db.Inventory.bulkWrite
+(
+	[
+		{
+			insertOne :
+			{
+			"document":
+				{
+				item : "paper",
+				qty : 400,
+				tags : ["Yellow", "White"],
+				size : {length:8.5, wide:11},
+				status : "D",
+				vendor : 14
+				}
+			}
+		},
+
+		{
+			insertOne :
+			{
+			"document":
+				{
+				item : "planner",
+				qty : 75,
+				tags : ["White"],
+				size : {length:22.85, wide:30},
+				status : "O",
+				vendor : 2
+				}
+			}
+		},
+
+		{
+			insertOne :
+			{
+			"document":
+				{
+				item : "postcard",
+				qty : 45,
+				tags : ["Multi-color"],
+				size : {length:10, wide:15.25},
+				status : "A",
+				vendor : 3
+				}
+			}
+		},
+
+		{
+			insertOne :
+			{
+			"document":
+				{
+				item : "sketchbook",
+				qty : 80,
+				tags : ["White"],
+				size : {length:14, wide:21},
+				status : "A",
+				vendor : 1
+				}
+			}
+		},
+
+		{
+			updateOne :
+			{
+				"filter" : {item : "sketchbook"},
+				"update" : {qty : 500000000}
+			}
+		},
+
+		{
+			deleteOne :
+			{
+				"filter" : {item : "notebook"}
+			}
+		}
+	],
+
+	{
+	ordered : false
+	}
+);
+
+#a-4i
+db.Inventory.updateOne
+(
+	{item : "mousepad"},
+
+	{
+	$set : {qty : 50}
+	}
+);
+
+#######################################################
+#1 is ascending
+#-1 is descending
+
+#b-1i
+db.Inventory.createIndex
+(
+	{
+		item : 1
+	}
+);
+
+#b-2i
+db.Inventory.createIndex
+(
+	{
+		item : 1,
+		qty : -1
+	}
+);
+
+#b-3i-1
+db.Inventory.createIndex
+(
+	{
+		item : 1,
+		size : 1
+	}
+);
+
+#b-3i-2
+db.Inventory.createIndex
+(
+	{
+		size : -1
+	}
+);
+
+#b-3i-3
+db.Inventory.createIndex
+(
+	{
+		item : -1,
+		qty : 1
+	}
+);
+
+#####################################################
+#c-1i
+db.Inventory.find
+(
+	{
+	item : "planner",
+	qty : {$lt : 80}
+	}
+);
+
+#c-2i
+db.Inventory.find
+(
+	{
+	status : "A",
+	qty : {$gt : 50}
+	}
+);
+
+#c-3i
+db.Inventory.find
+(
+	{
+	"size.length" : {$gt : 14},
+	"size.wide" : {$gt : 20},
+	}
+);
+
+#d
+#get all index
+db.Inventory.getIndexes()
+
+#e
+#drop all index
+db.Inventory.dropIndexes()
+
+#NOTE THAT
+#db.Inventory.dropIndex()
+#is use for specific index only e.g.
+#
+#db.accounts.dropIndex( { "tax-id": 1 } )
+
